@@ -275,7 +275,7 @@ def main():
 	root.geometry("1200x800")
 
 	# family_tree = FamilyTree("data/example_people.json", "data/example_marriages.json")
-	family_tree = FamilyTree("data/people.json", "data/marriages.json")
+	family_tree = FamilyTree("data/my_people.json", "data/my_marriages.json")
 	center_id = 6
 
 	viewer = FamilyTreeViewer(root, family_tree, center_id=center_id)

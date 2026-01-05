@@ -162,6 +162,18 @@ class FamilyTree():
 		p = [person for person in self.people if person.GetId() == id]
 		assert(len(p) == 1)
 		return p[0]
+
+	def IsAncestor(self, potential_ancestor, subject) -> bool:
+		return potential_ancestor in self.GetAncestorsOf(subject)
+
+	def GetAncestorsOf(self, subject: Person):
+		ancestors = set()
+		for p in subject.Parents:
+			ancestors.add(p)
+			for a in self.GetAncestorsOf(p):
+				ancestors.add(a)
+		return ancestors
+
 		
 	def GetLocalPeople(self, center_id, max_up=2, max_down=2, max_nodes=200):
 		center = self.GetPersonFromID(center_id)
@@ -228,5 +240,6 @@ class FamilyTree():
 		return local_marriages
 		
 if __name__ == "__main__":
-	familyTree = FamilyTree("people.json", "marriages.json")
-	print(familyTree)
+	familyTree = FamilyTree("data/my_people.json", "data/my_marriages.json")
+	me = familyTree.GetPersonFromID(14)
+	print([str(a) for a in familyTree.GetAncestorsOf(me)])
