@@ -49,16 +49,6 @@ class Person():
 	def __str__(self):
 		return self.GetNodeLabel()
 		
-	def graphviz(self):
-		opts = ['label="' + self.GetNodeLabel() + '"']
-		shape = "square" if self.Gender == "Male" else "ellipse"
-		color = "cornflowerblue" if self.Gender == "Male" else "lightcoral"
-		opts.append('style=filled')
-		opts.append('shape=' + shape)
-		opts.append('fillcolor=' + color)
-		opts.append('color=' + color)
-		return self.GetNodeId() + '[' + ','.join(opts) + ']'
-		
 class Marriage():
 	next_id = 0
 
@@ -241,6 +231,5 @@ class FamilyTree():
 		return local_marriages
 		
 if __name__ == "__main__":
-	from family_tree_graphviz import to_graphviz
 	familyTree = FamilyTree("people.json", "marriages.json")
-	print(to_graphviz(familyTree))
+	print(familyTree)
