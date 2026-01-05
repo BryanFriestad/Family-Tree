@@ -1,0 +1,42 @@
+{
+	"Marriages": [
+		{
+			"Person1":0,
+			"Person2":1,
+			"Children": [
+				4
+			]
+		},
+		{
+			"Person1":2,
+			"Person2":3,
+			"Children": [
+				5
+			]
+		},
+		{
+			"Person1":4,
+			"Person2":5,
+			"Children": [
+				6,
+				7,
+				8
+			]
+		},
+		{
+			"Person1":6,
+			"Person2":9,
+			"Children": [
+				10,
+				11
+			]
+		},
+		{
+			"Person1":7,
+			"Person2":12,
+			"Children": [
+				
+			]
+		}
+	]
+}

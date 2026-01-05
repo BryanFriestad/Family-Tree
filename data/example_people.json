@@ -1,0 +1,69 @@
+{
+	"People": [
+		{
+			"FirstName": "Grandpa A",
+			"Gender": "Male",
+			"ID": 0
+		},
+		{
+			"FirstName": "Grandma A",
+			"Gender": "Female",
+			"ID": 1
+		},
+		{
+			"FirstName": "Grandpa B",
+			"Gender": "Male",
+			"ID": 2
+		},
+		{
+			"FirstName": "Grandma B",
+			"Gender": "Female",
+			"ID": 3
+		},
+		{
+			"FirstName": "Dad",
+			"Gender": "Male",
+			"ID": 4
+		},
+		{
+			"FirstName": "Mom",
+			"Gender": "Female",
+			"ID": 5
+		},
+		{
+			"FirstName": "Me",
+			"Gender": "Male",
+			"ID": 6
+		},
+		{
+			"FirstName": "Sister",
+			"Gender": "Female",
+			"ID": 7
+		},
+		{
+			"FirstName": "Brother",
+			"Gender": "Male",
+			"ID": 8
+		},
+		{
+			"FirstName": "Spouse",
+			"Gender": "Female",
+			"ID": 9
+		},
+		{
+			"FirstName": "Son",
+			"Gender": "Male",
+			"ID": 10
+		},
+		{
+			"FirstName": "Daughter",
+			"Gender": "Female",
+			"ID": 11
+		},
+		{
+			"FirstName": "Brother-in-law",
+			"Gender": "Male",
+			"ID": 12
+		}		
+	]
+}

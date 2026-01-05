@@ -1,10 +1,9 @@
 import tkinter as tk
-from dataclasses import dataclass
-
+from tkinter import Canvas
 from FamilyTree import FamilyTree
+from family_tree_layout import compute_canvas_layout
 
 
-@dataclass(frozen=True)
 class ViewConfig:
 	node_w: int = 120
 	node_h: int = 46
@@ -117,7 +116,8 @@ class FamilyTreeViewer(tk.Frame):
 		return None
 
 	def redraw(self, center_on_load: bool):
-		layout = self.family_tree.ComputeCanvasLayout(
+		layout = compute_canvas_layout(
+			self.family_tree,
 			self.center_id,
 			max_up=self.max_up,
 			max_down=self.max_down,
@@ -183,8 +183,9 @@ class FamilyTreeViewer(tk.Frame):
 			x_min = min(child_xs)
 			x_max = max(child_xs)
 			nearest_child_y = min(child_ys)
-			x_left = min(x_min, mx)
-			x_right = max(x_max, mx)
+			x_left = x_min
+			x_right = x_max
+			sib_x = (x_left + x_right) / 2
 
 			parent_anchor_y = my + parent_anchor_dy
 			bus_y = min(nearest_child_y - child_anchor_dy - bus_gap, parent_anchor_y + 40)
@@ -195,7 +196,9 @@ class FamilyTreeViewer(tk.Frame):
 			bus_y += lane * 8
 			bus_y = min(bus_y, nearest_child_y - child_anchor_dy - 6)
 
-			draw_polyline([(mx, my), (mx, bus_y)], width=1)
+			# Marriage node -> sibling node (bus midpoint)
+			draw_polyline([(mx, my), (mx, bus_y), (sib_x, bus_y)], width=1)
+			# Sibling bus
 			draw_polyline([(x_left, bus_y), (x_right, bus_y)], width=1)
 
 			for child_id in children:
@@ -271,8 +274,9 @@ def main():
 	root.title("Family Tree Viewer")
 	root.geometry("1200x800")
 
-	family_tree = FamilyTree("people.json", "marriages.json")
-	center_id = 14
+	# family_tree = FamilyTree("data/example_people.json", "data/example_marriages.json")
+	family_tree = FamilyTree("data/people.json", "data/marriages.json")
+	center_id = 6
 
 	viewer = FamilyTreeViewer(root, family_tree, center_id=center_id)
 	viewer.pack(fill=tk.BOTH, expand=True)
