@@ -60,6 +60,18 @@ class Marriage():
 		self.Children = children
 		self.id = "m" + str(Marriage.next_id)
 		Marriage.next_id += 1
+
+		self.Person1.Spouses.append(self.Person2)
+		self.Person1.Marriages.append(self)
+		
+		self.Person2.Spouses.append(self.Person1)
+		self.Person2.Marriages.append(self)
+		
+		for child in self.Children:
+			self.Person1.Children.append(child)
+			self.Person2.Children.append(child)
+			child.Parents.append(self.Person1)
+			child.Parents.append(self.Person2)
 		
 	def GetId(self):
 		return self.id
@@ -75,8 +87,6 @@ class FamilyTree():
 	def __init__(self, people_file, marraiges_file):
 		self.people = self._GetPeople(people_file)
 		self.marriages = self._GetMarriages(marraiges_file)
-		for marriage in self.marriages:
-			self._SetupMarriageRelationships(marriage)
 		self.generations = self._DetermineGenerations()
 		
 	def _GetPeople(self, filename):
@@ -95,21 +105,8 @@ class FamilyTree():
 				children = []
 				for c in marriage['Children']:
 					children.append(self.GetPersonFromID(c))
-				m.append(Marriage(self.GetPersonFromID(marriage["Person1"]), self.GetPersonFromID(marriage["Person2"]),children))
+				m.append(Marriage(self.GetPersonFromID(marriage["Person1"]), self.GetPersonFromID(marriage["Person2"]), children))
 		return m
-		
-	def _SetupMarriageRelationships(self, marriage):
-		marriage.Person1.Spouses.append(marriage.Person2)
-		marriage.Person1.Marriages.append(marriage)
-		
-		marriage.Person2.Spouses.append(marriage.Person1)
-		marriage.Person2.Marriages.append(marriage)
-		
-		for child in marriage.Children:
-			marriage.Person1.Children.append(child)
-			marriage.Person2.Children.append(child)
-			child.Parents.append(marriage.Person1)
-			child.Parents.append(marriage.Person2)
 			
 	def _DetermineGenerations(self):
 		# Set generations of all people
